@@ -13,7 +13,7 @@ interface AppOwnProps {
 }
 
 const ConversationId = async ({ params }: AppProps & AppOwnProps) => {
-  const conversationId = (await params).conversationId;
+  const { conversationId } = await params;
   const conversation = await getConversationById(conversationId);
   const messages = await getMessages(conversationId);
 
