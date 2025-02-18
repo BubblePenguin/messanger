@@ -11,7 +11,7 @@ interface IParams {
 
 export async function DELETE(request: Request, { params }: IParams) {
   try {
-    const conversationId = await params?.conversationId;
+    const conversationId = params?.conversationId;
     const currentuser = await getCurrentuser();
 
     if (!currentuser?.id)
