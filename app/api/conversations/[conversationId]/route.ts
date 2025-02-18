@@ -3,10 +3,13 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import { pusherServer } from "@/app/libs/pusher";
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { conversationId: string } }
-) {
+interface RouterParams {
+  params: {
+    conversationId: string;
+  };
+}
+
+export async function DELETE(request: Request, { params }: RouterParams) {
   try {
     const { conversationId } = params;
     const currentuser = await getCurrentuser();
@@ -46,8 +49,8 @@ export async function DELETE(
     });
 
     return NextResponse.json(deletedConversation);
-  } catch (error: any) {
-    console.log(error, "ERROR_CONVERSATION_DELETE");
+  } catch (error) {
+    // console.log(error, "ERROR_CONVERSATION_DELETE");
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
