@@ -1,10 +1,11 @@
+"use server";
+
 import getConversationById from "@/app/actions/getConversationByid";
 import getMessages from "@/app/actions/getMessages";
 import EmptyState from "@/app/components/EmptyState";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Form from "./components/Form";
-import type { AppProps } from "next/app";
 
 interface AppOwnProps {
   params: {
@@ -12,8 +13,8 @@ interface AppOwnProps {
   };
 }
 
-const ConversationId = async ({ params }: AppProps & AppOwnProps) => {
-  const { conversationId } = params;
+const ConversationId = async ({ params }: AppOwnProps) => {
+  const { conversationId } = await params;
   const conversation = await getConversationById(conversationId);
   const messages = await getMessages(conversationId);
 
