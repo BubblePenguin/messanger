@@ -4,12 +4,15 @@ import EmptyState from "@/app/components/EmptyState";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Form from "./components/Form";
+import { AppProps } from "next/app";
 
-interface IParams {
-  conversationId: string;
+interface AppOwnProps {
+  params: {
+    conversationId: string;
+  };
 }
 
-const ConversationId = async ({ params }: { params: IParams }) => {
+const ConversationId = async ({ params }: AppProps & AppOwnProps) => {
   const conversationId = (await params).conversationId;
   const conversation = await getConversationById(conversationId);
   const messages = await getMessages(conversationId);
