@@ -7,10 +7,10 @@ interface IParams {
   conversationId?: string;
 }
 
-export async function POST(request: Request, { params }: { params: IParams }) {
+export async function POST(request: Request) {
   try {
     const currentuser = await getCurrentuser();
-    const { conversationId } = await params;
+    const { conversationId } = await request.json();
 
     if (!currentuser?.id || !currentuser.email)
       return new NextResponse("Unauthorized", { status: 401 });
