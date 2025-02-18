@@ -4,6 +4,7 @@ import EmptyState from "@/app/components/EmptyState";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Form from "./components/Form";
+import type { AppProps } from "next/app";
 
 interface AppOwnProps {
   params: {
@@ -11,7 +12,7 @@ interface AppOwnProps {
   };
 }
 
-const ConversationId: React.FC<AppOwnProps> = async ({ params }) => {
+const ConversationId = async ({ params }: AppProps & AppOwnProps) => {
   const { conversationId } = params;
   const conversation = await getConversationById(conversationId);
   const messages = await getMessages(conversationId);
