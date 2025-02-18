@@ -1,3 +1,5 @@
+"use server";
+
 import getCurrentuser from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
@@ -9,9 +11,12 @@ interface RouterParams {
   };
 }
 
-export async function DELETE(request: Request, { params }: RouterParams) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ conversationId: string }> }
+) {
   try {
-    const { conversationId } = params;
+    const { conversationId } = await params;
     const currentuser = await getCurrentuser();
 
     if (!currentuser?.id)
