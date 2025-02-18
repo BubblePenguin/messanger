@@ -12,8 +12,8 @@ interface AppOwnProps {
   };
 }
 
-const ConversationId = async ({ params }: AppProps & AppOwnProps) => {
-  const { conversationId } = await params;
+const ConversationId: React.FC<AppProps & AppOwnProps> = async ({ params }) => {
+  const { conversationId } = params;
   const conversation = await getConversationById(conversationId);
   const messages = await getMessages(conversationId);
 
