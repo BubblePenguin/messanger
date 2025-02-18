@@ -4,13 +4,12 @@ import prisma from "@/app/libs/prismadb";
 import { pusherServer } from "@/app/libs/pusher";
 
 interface IParams {
-  conversationId?: string;
+  params: {
+    conversationId?: string;
+  };
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: IParams }
-) {
+export async function DELETE(request: Request, { params }: IParams) {
   try {
     const { conversationId } = await params;
     const currentuser = await getCurrentuser();
